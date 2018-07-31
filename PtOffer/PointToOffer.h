@@ -3,61 +3,62 @@
 // Author: junminfan@126.com (FanJunmin)
 // Update: 2018/7/22
 
-
 #pragma once
+#ifndef POINTTOOFFER_H_
+#define POINTTOOFFER_H_
 //#include <bits/stdc++.h>
-#include <assert.h>	//for assert
-#include <vector>
-#include <map>
+#include <assert.h>  //for assert
 #include <algorithm>
-#include <queue>
-#include <set>
-#include <string>
-#include <numeric>	//for iota()
 #include <list>
-#include <stack>
+#include <map>
+#include <numeric>  //for iota()
+#include <queue>
 #include <regex>
+#include <set>
+#include <stack>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-//需要声明的一些数据结构：
+//需要声明的一些数据结构以及初始化/释放函数
 struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+  int val;
+  struct TreeNode* left;
+  struct TreeNode* right;
+  TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
 struct ListNode {
-	int val;
-	ListNode *next;
-	ListNode(int x) : val(x), next(NULL) {}
+  int val;
+  ListNode* next;
+  ListNode(int x) : val(x), next(NULL) {}
 };
 
 struct TreeLinkNode {
-	int val;
-	struct TreeLinkNode *left;
-	struct TreeLinkNode *right;
-	struct TreeLinkNode *next;
-	TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+  int val;
+  struct TreeLinkNode* left;
+  struct TreeLinkNode* right;
+  struct TreeLinkNode* next;
+  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
 
 struct RandomListNode {
-	int label;
-	struct RandomListNode *next, *random;
-	RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
+  int label;
+  struct RandomListNode *next, *random;
+  RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
 };
 
 //------------------------Array数组-----------------------
 
 //二维数组中的查找
-bool Find(int target, vector<vector<int> > array);
+bool Find(int target, vector<vector<int>> array);
 
 //旋转数组的最小数字
 int minNumberInRotateArray(vector<int> rotateArray);
 
 //调整数组顺序使奇数位于偶数前面
-void reOrderArray(vector<int> &array);
+void reOrderArray(vector<int>& array);
 
 //数组中出现次数超过一半的数字
 int MoreThanHalfNum_Solution(vector<int> numbers);
@@ -76,16 +77,16 @@ int InversePairs(vector<int> data);
 int GetNumberOfK(vector<int> data, int k);
 
 //数组中只出现一次的数字
-void FindNumsAppearOnce(vector<int> data, int* num1, int *num2);
+void FindNumsAppearOnce(vector<int> data, int* num1, int* num2);
 
 //数组中重复的数字
 bool duplicate(int numbers[], int length, int* duplication);
 
 //顺时针打印矩阵
-vector<int> printMatrix(vector<vector<int> > matrix);
+vector<int> printMatrix(vector<vector<int>> matrix);
 
 //和为S的连续正数序列
-vector<vector<int> > FindContinuousSequence(int sum);
+vector<vector<int>> FindContinuousSequence(int sum);
 
 //丑数
 int GetUglyNumber_Solution(int index);
@@ -120,7 +121,7 @@ void pBackTracking(set<string>& strSet, string& str, int beg);
 vector<string> Permutation(string str);
 
 //替换空格
-void replaceSpace(char *str, int length);
+void replaceSpace(char* str, int length);
 
 //第一个只出现一次的字符
 int FirstNotRepeatingChar(string str);
@@ -147,7 +148,7 @@ bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2);
 bool isSubtree(TreeNode* pRoot1, TreeNode* pRoot2);
 
 //二叉树的镜像
-void Mirror(TreeNode *pRoot);
+void Mirror(TreeNode* pRoot);
 
 //从上往下打印二叉树
 vector<int> PrintFromTopToBottom(TreeNode* root);
@@ -157,8 +158,9 @@ bool judgeBST(vector<int> sequence);
 bool VerifySquenceOfBST(vector<int> sequence);
 
 //二叉树中和为某一值的路径
-void FindPath(vector<vector<int> >&vvec, TreeNode* root, int expNum, vector<int> temp);
-vector<vector<int> > FindPath(TreeNode* root, int expectNumber);
+void FindPath(vector<vector<int>>& vvec, TreeNode* root, int expNum,
+              vector<int> temp);
+vector<vector<int>> FindPath(TreeNode* root, int expectNumber);
 
 //二叉搜索树与双向链表
 void recurConvert(TreeNode* root, TreeNode*& pre);
@@ -179,11 +181,11 @@ bool isSymmetrical(TreeNode* lChild, TreeNode* rChild);
 bool isSymmetrical(TreeNode* pRoot);
 
 //把二叉树打印成多行
-void recursion(TreeNode* pRoot, vector<vector<int>> &vec, int index);
-vector<vector<int> > Print2(TreeNode* pRoot);
+void recursion(TreeNode* pRoot, vector<vector<int>>& vec, int index);
+vector<vector<int>> Print2(TreeNode* pRoot);
 
 //按之字形顺序打印二叉树
-vector<vector<int> > Print(TreeNode* pRoot);
+vector<vector<int>> Print(TreeNode* pRoot);
 
 //二叉搜索树的第k个结点
 void KthNode(TreeNode* pRoot, vector<TreeNode*>& TN);
@@ -191,16 +193,17 @@ TreeNode* KthNode(TreeNode* pRoot, int k);
 
 //序列化二叉树
 //采用先序遍历，用vector存储
-void Serialize(vector<int>& sto, TreeNode *root);
-char* Serialize(TreeNode *root);
+void Serialize(vector<int>& sto, TreeNode* root);
+char* Serialize(TreeNode* root);
 TreeNode* Deserialize(int*& str);
-TreeNode* Deserialize(char *str);
+TreeNode* Deserialize(char* str);
 
 //---------------------------回溯-------------------------------
 
 //矩阵中的路径
 bool hasPath(char* matrix, int rows, int cols, char* str);
-bool hasPath(char* matrix, int rows, int cols, char* str, bool* flag, int x, int y, int index);
+bool hasPath(char* matrix, int rows, int cols, char* str, bool* flag, int x,
+             int y, int index);
 
 //机器人的运动范围
 bool compVal(int x, int y, int threshold);
@@ -258,3 +261,5 @@ double Power(double base, int exponent);
 
 //孩子们的游戏(圆圈中最后剩下的数)
 int LastRemaining_Solution(int n, int m);
+
+#endif  // POINTTOOFFER_H_
