@@ -1,5 +1,65 @@
-#include "PointToOffer.h"
 #include "stdafx.h"
+#include "PointToOffer.h"
+
+//---------------------------栈和队列-----------------------
+
+//滑动窗口的最大值
+vector<int> maxInWindows(const vector<int> &num, unsigned int size) {
+  if (num.empty() || num.size() < size || size <= 0) 
+		return {};
+	vector<int> re;
+	deque<int> store;
+  for (int i = 0; i < num.size(); ++i) {
+    while (!store.empty() && num[store.back()] <= num[i]) 
+			store.pop_back();			//保证队列首元素是当前窗口最大值下标
+    while (!store.empty() && i + 1 - store.front() > size)
+			store.pop_front();		//保证首元素在当前窗口范围
+    store.push_back(i);
+    if (i + 1 >= size) 
+			re.push_back(num[store.front()]);
+  }
+	return re;
+}
+
+//包含min函数的栈
+void push(int value) {
+	g_dataStack.push(value);
+	if (g_minStack.empty() || g_minStack.top() >= value)
+		g_minStack.push(value);
+}
+void pop() {
+  if (g_dataStack.empty()) 
+		throw "stack is empty!";
+	if (g_dataStack.top() == g_minStack.top())
+		g_minStack.pop();
+  g_dataStack.pop();
+}
+int top() {
+  if (g_dataStack.empty()) 
+		throw "stack is empty!";
+	return g_dataStack.top();
+}
+int min() {
+  if (g_minStack.empty())
+		throw "stack is empty!";
+	return g_minStack.top(); 
+}
+
+//栈的压入、弹出序列
+bool IsPopOrder(vector<int> pushV, vector<int> popV) {
+	//使用栈进行模拟
+	if (pushV.empty() || popV.size() != pushV.size())
+		return false;
+	stack<int> simulate_stack;
+	for (int i = 0, j = 0; i < pushV.size(); ++i) {
+		simulate_stack.push(pushV[i]);
+		while (!simulate_stack.empty() && popV[j] == simulate_stack.top()) {
+			++j;
+			simulate_stack.pop();
+		}
+	}
+	return simulate_stack.empty();
+}
 
 //---------------------------链表---------------------------
 

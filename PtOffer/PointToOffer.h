@@ -1,12 +1,13 @@
 // CopyRight 2018, FanJunmin.
 // All rights reserved.
 // Author: junminfan@126.com (FanJunmin)
-// Update: 2018/7/22
+// Update: 2018/8/2
 
 #pragma once
 #ifndef POINTTOOFFER_H_
 #define POINTTOOFFER_H_
 //#include <bits/stdc++.h>
+#include <iostream>
 #include <assert.h>  //for assert
 #include <algorithm>
 #include <list>
@@ -217,7 +218,7 @@ int movingCount(int threshold, int rows, int cols);
 vector<int> maxInWindows(const vector<int>& num, unsigned int size);
 
 //°üº¬minº¯ÊýµÄÕ»
-static stack<int> dataStack, minStack;
+static stack<int> g_dataStack{}, g_minStack{};
 void push(int value);
 void pop();
 int top();
