@@ -1,7 +1,7 @@
 // CopyRight 2018, FanJunmin.
 // All rights reserved.
 // Author: junminfan@126.com (FanJunmin)
-// Update: 2018/8/2
+// Update: 2018/8/5
 
 #pragma once
 #ifndef POINTTOOFFER_H_
@@ -159,8 +159,10 @@ bool judgeBST(vector<int> sequence);
 bool VerifySquenceOfBST(vector<int> sequence);
 
 //二叉树中和为某一值的路径
-void FindPath(vector<vector<int>>& vvec, TreeNode* root, int expNum,
-              vector<int> temp);
+void FindPath(vector<vector<int>>& vec_store,
+							vector<int> store,
+							TreeNode* root,
+              int expNumber);
 vector<vector<int>> FindPath(TreeNode* root, int expectNumber);
 
 //二叉搜索树与双向链表
@@ -182,8 +184,7 @@ bool isSymmetrical(TreeNode* lChild, TreeNode* rChild);
 bool isSymmetrical(TreeNode* pRoot);
 
 //把二叉树打印成多行
-void recursion(TreeNode* pRoot, vector<vector<int>>& vec, int index);
-vector<vector<int>> Print2(TreeNode* pRoot);
+vector<vector<int>> Print(TreeNode* pRoot);
 
 //按之字形顺序打印二叉树
 vector<vector<int>> Print(TreeNode* pRoot);
@@ -207,9 +208,9 @@ bool hasPath(char* matrix, int rows, int cols, char* str, bool* flag, int x,
              int y, int index);
 
 //机器人的运动范围
-bool compVal(int x, int y, int threshold);
-int findById(vector<int> id, int p);
-void unionById(vector<int>& id, int p, int q);
+bool IsVaildVal(int x, int y, int threshold);
+int Find(vector<int> &id, int p);
+void Union(vector<int>& id, vector<int>& sz, int p, int q);
 int movingCount(int threshold, int rows, int cols);
 
 //---------------------------栈和队列--------------------------
