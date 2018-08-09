@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="9" failures="0" disabled="0" errors="0" timestamp="2018-08-06T16:06:53" time="0.029" name="AllTests">
+<testsuites tests="9" failures="0" disabled="0" errors="0" timestamp="2018-08-07T12:36:52" time="0.038" name="AllTests">
   <testsuite name="movingCountTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
-    <testcase name="HandleAnyInput" status="run" time="0" classname="movingCountTest" />
+    <testcase name="HandleAnyInput" status="run" time="0.001" classname="movingCountTest" />
   </testsuite>
   <testsuite name="maxInWindowsTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
     <testcase name="HandleAnyInput" status="run" time="0" classname="maxInWindowsTest" />
   </testsuite>
-  <testsuite name="MinStackTest" tests="2" failures="0" disabled="0" errors="0" time="0">
+  <testsuite name="MinStackTest" tests="2" failures="0" disabled="0" errors="0" time="0.007">
     <testcase name="Input1" status="run" time="0" classname="MinStackTest" />
-    <testcase name="Input2" status="run" time="0" classname="MinStackTest" />
+    <testcase name="Input2" status="run" time="0.001" classname="MinStackTest" />
   </testsuite>
-  <testsuite name="IsPopOrderTest" tests="1" failures="0" disabled="0" errors="0" time="0">
-    <testcase name="HanleAnyInput" status="run" time="0" classname="IsPopOrderTest" />
+  <testsuite name="IsPopOrderTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="HanleAnyInput" status="run" time="0.001" classname="IsPopOrderTest" />
   </testsuite>
   <testsuite name="printListFromTailToHeadTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
-    <testcase name="HandleAnyInput" status="run" time="0.001" classname="printListFromTailToHeadTest" />
+    <testcase name="HandleAnyInput" status="run" time="0" classname="printListFromTailToHeadTest" />
   </testsuite>
-  <testsuite name="FibonacciTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+  <testsuite name="FibonacciTest" tests="1" failures="0" disabled="0" errors="0" time="0.002">
     <testcase name="HandleAnyInput" status="run" time="0" classname="FibonacciTest" />
   </testsuite>
-  <testsuite name="PowerTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+  <testsuite name="PowerTest" tests="1" failures="0" disabled="0" errors="0" time="0.002">
     <testcase name="HandleAnyInput" status="run" time="0" classname="PowerTest" />
   </testsuite>
-  <testsuite name="LastRemaining_SolutionTest" tests="1" failures="0" disabled="0" errors="0" time="0.015">
+  <testsuite name="LastRemaining_SolutionTest" tests="1" failures="0" disabled="0" errors="0" time="0.004">
     <testcase name="HandleAnyInput" status="run" time="0" classname="LastRemaining_SolutionTest" />
   </testsuite>
 </testsuites>

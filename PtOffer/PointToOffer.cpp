@@ -4,11 +4,46 @@
 //---------------------------树--------------------------------
 
 //重建二叉树
-TreeNode *reConstructBinaryTree(vector<int> pre, vector<int> vin) ;
+TreeNode *reConstructBinaryTree(vector<int>::iterator pre_first, 
+																vector<int>::iterator pre_last,
+                                vector<int>::iterator vin_first,
+                                vector<int>::iterator vin_last) {
+	if (vin_last - vin_first != pre_last - pre_first ||
+			pre_last == pre_first || vin_first == vin_last) {
+		return nullptr;
+	}
+	TreeNode *curr_node = new TreeNode(*pre_first);
+	if (pre_last == pre_first + 1) return curr_node;
+	auto iter = vin_first;
+	while (iter++ < vin_last) {
+		if (*iter == *pre_first) break;
+	}
+	int len = iter - vin_first;
+	curr_node->left = reConstructBinaryTree(pre_first + 1, 
+																					pre_first + len + 1, vin_first, iter);
+	curr_node->right = reConstructBinaryTree(pre_first + len + 1, 
+																					 pre_last, iter + 1, vin_last);
+	return curr_node;
+}
+TreeNode *reConstructBinaryTree(vector<int> pre, vector<int> vin) {
+  return reConstructBinaryTree(pre.begin(), pre.end(), vin.begin(), vin.end());
+}
 
 //树的子结构
-bool HasSubtree(TreeNode *pRoot1, TreeNode *pRoot2);
-bool isSubtree(TreeNode *pRoot1, TreeNode *pRoot2);
+bool isSubtree(TreeNode *pRoot1, TreeNode *pRoot2) {
+  //判断以pRoot2为根节点的树是否是以pRoot1为根节点的树的子树
+	if (!pRoot2) return true;
+	if (!pRoot1) return false;
+	return pRoot1->val != pRoot2->val ? false :
+				 isSubtree(pRoot1->left, pRoot2->left) &&
+				 isSubtree(pRoot1->right, pRoot2->right);
+}
+bool HasSubtree(TreeNode *pRoot1, TreeNode *pRoot2) {
+	if(!pRoot1 || !pRoot2) return false;
+	return isSubtree(pRoot1, pRoot2) ||
+				 isSubtree(pRoot1->left, pRoot2) ||
+				 isSubtree(pRoot1->right, pRoot2);
+}
 
 //二叉树的镜像
 void Mirror(TreeNode *pRoot) {
@@ -38,8 +73,25 @@ vector<int> PrintFromTopToBottom(TreeNode *root) {
 }
 
 //二叉搜索树的后序遍历序列
-bool judgeBST(vector<int> sequence);
-bool VerifySquenceOfBST(vector<int> sequence);
+bool judgeBST(vector<int>::iterator first, vector<int>::iterator last) {
+	if (last == first) return true;
+	int root_val = *(last - 1);
+	auto iter = first;
+	while (iter < last - 1) {
+		if (*iter > root_val) break;
+		++iter;
+	}
+	auto temp = iter;
+	while (iter < last - 1) {
+		if (*iter  <= root_val) return false;
+		++iter;
+	}
+	return judgeBST(first, temp) && judgeBST(temp, last - 1);
+}
+bool VerifySquenceOfBST(vector<int> sequence) {
+	if (sequence.empty()) return false;
+	return judgeBST(sequence.begin(), sequence.end());
+}
 
 //二叉树中和为某一值的路径
 void FindPath(vector<vector<int>> &vec_store, 
@@ -203,18 +255,82 @@ vector<vector<int>> Print(TreeNode *pRoot) {
 }
 
 //按之字形顺序打印二叉树
-vector<vector<int>> Print(TreeNode *pRoot);
+vector<vector<int>> Print(TreeNode *pRoot) {
+	if (!pRoot) return {};
+	vector<vector<int>> result;
+	stack<TreeNode *> odd, even;
+	even.push(pRoot);		//从第零行开始
+	while (!even.empty() || !odd.empty()) {
+		vector<int> line;
+		if (odd.empty()) {
+			while (!even.empty()) {
+				TreeNode *curr_node = even.top();
+				even.pop();
+				line.push_back(curr_node->val);
+				if (curr_node->left) odd.push(curr_node->left);
+				if (curr_node->right) odd.push(curr_node->right);	//注意，先左后右
+			}
+		}
+		else {
+			while (!odd.empty()) {
+				TreeNode *curr_node = odd.top();
+				odd.pop();
+				line.push_back(curr_node->val);
+				if (curr_node->right) even.push(curr_node->right);
+				if (curr_node->left) even.push(curr_node->left);		//注意，先右后左
+			}			
+		}
+		result.push_back(line);
+	}
+	return result;
+}
 
 //二叉搜索树的第k个结点
-void KthNode(TreeNode *pRoot, vector<TreeNode *> &TN);
-TreeNode *KthNode(TreeNode *pRoot, int k);
+void inOrderTraversal(TreeNode *pRoot, vector<TreeNode *> &store) {
+  if (!pRoot) return;
+  inOrderTraversal(pRoot->left, store);
+  store.push_back(pRoot);
+  inOrderTraversal(pRoot->right, store);
+}
+TreeNode *KthNode(TreeNode *pRoot, int k) {
+  vector<TreeNode *> store;
+  inOrderTraversal(pRoot, store);
+  return k > 0 && k <= store.size() ? store[k - 1] : nullptr;
+}
 
 //序列化二叉树
 //采用先序遍历，用vector存储
-void Serialize(vector<int> &sto, TreeNode *root);
-char *Serialize(TreeNode *root);
-TreeNode *Deserialize(int *&str);
-TreeNode *Deserialize(char *str);
+void Serialize(vector<int> &sto, TreeNode *root) {
+  if (!root)
+    sto.push_back(0xffff);
+  else {
+    sto.push_back(root->val);
+    Serialize(sto, root->left);
+    Serialize(sto, root->right);
+  }
+}
+char *Serialize(TreeNode *root) {
+  vector<int> sto;
+  Serialize(sto, root);
+  int *res = new int[sto.size()];
+  for (int i = 0; i < sto.size(); ++i) res[i] = sto[i];
+  return (char *)res;
+}
+TreeNode *Deserialize(int *&str) {
+  if (*str == 0xffff) {
+    ++str;
+    return NULL;
+  }
+  TreeNode *res = new TreeNode(*str);
+  ++str;
+  res->left = Deserialize(str);
+  res->right = Deserialize(str);
+  return res;
+}
+TreeNode *Deserialize(char *str) {
+  int *p = (int *)str;
+  return Deserialize(p);
+}
 
 
 //---------------------------回溯-------------------------------

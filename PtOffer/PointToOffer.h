@@ -155,7 +155,7 @@ void Mirror(TreeNode* pRoot);
 vector<int> PrintFromTopToBottom(TreeNode* root);
 
 //二叉搜索树的后序遍历序列
-bool judgeBST(vector<int> sequence);
+bool judgeBST(vector<int>::iterator first, vector<int>::iterator last);
 bool VerifySquenceOfBST(vector<int> sequence);
 
 //二叉树中和为某一值的路径
@@ -190,7 +190,7 @@ vector<vector<int>> Print(TreeNode* pRoot);
 vector<vector<int>> Print(TreeNode* pRoot);
 
 //二叉搜索树的第k个结点
-void KthNode(TreeNode* pRoot, vector<TreeNode*>& TN);
+void inOrderTraversal(TreeNode* pRoot, vector<TreeNode *>& store);
 TreeNode* KthNode(TreeNode* pRoot, int k);
 
 //序列化二叉树
