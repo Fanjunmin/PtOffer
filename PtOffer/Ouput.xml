@@ -1,28 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="9" failures="0" disabled="0" errors="0" timestamp="2018-08-07T12:36:52" time="0.038" name="AllTests">
-  <testsuite name="movingCountTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
-    <testcase name="HandleAnyInput" status="run" time="0.001" classname="movingCountTest" />
+<testsuites tests="26" failures="0" disabled="0" errors="0" timestamp="2018-08-12T17:18:54" time="0.188" name="AllTests">
+  <testsuite name="FindTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="HandleAnyInput" status="run" time="0" classname="FindTest" />
   </testsuite>
-  <testsuite name="maxInWindowsTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
-    <testcase name="HandleAnyInput" status="run" time="0" classname="maxInWindowsTest" />
+  <testsuite name="minNumberInRotateArrayTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="HandleAnyInput" status="run" time="0" classname="minNumberInRotateArrayTest" />
   </testsuite>
-  <testsuite name="MinStackTest" tests="2" failures="0" disabled="0" errors="0" time="0.007">
+  <testsuite name="reOrderArrayTest" tests="1" failures="0" disabled="0" errors="0" time="0.003">
+    <testcase name="handleAnyInput" status="run" time="0" classname="reOrderArrayTest" />
+  </testsuite>
+  <testsuite name="MoreThanHalfNum_SolutionTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="handAnyInput" status="run" time="0" classname="MoreThanHalfNum_SolutionTest" />
+  </testsuite>
+  <testsuite name="FindGreatestSumOfSubArrayTest" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="handleAnyInput" status="run" time="0" classname="FindGreatestSumOfSubArrayTest" />
+  </testsuite>
+  <testsuite name="PrintMinNumberTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="handleAnyInput" status="run" time="0.001" classname="PrintMinNumberTest" />
+  </testsuite>
+  <testsuite name="InversePairsTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="handleAnyInput" status="run" time="0" classname="InversePairsTest" />
+  </testsuite>
+  <testsuite name="GetNumberOfKTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="handleAnyInput" status="run" time="0" classname="GetNumberOfKTest" />
+  </testsuite>
+  <testsuite name="FindNumsAppearOnceTest" tests="1" failures="0" disabled="0" errors="0" time="0.003">
+    <testcase name="handleAnyInput" status="run" time="0" classname="FindNumsAppearOnceTest" />
+  </testsuite>
+  <testsuite name="duplicateTest" tests="1" failures="0" disabled="0" errors="0" time="0.006">
+    <testcase name="handleAnyInput" status="run" time="0" classname="duplicateTest" />
+  </testsuite>
+  <testsuite name="printMatrixTest" tests="1" failures="0" disabled="0" errors="0" time="0.008">
+    <testcase name="hanleAnyInput" status="run" time="0" classname="printMatrixTest" />
+  </testsuite>
+  <testsuite name="FindContinuousSequenceTest" tests="1" failures="0" disabled="0" errors="0" time="0.005">
+    <testcase name="handleAnyInput" status="run" time="0" classname="FindContinuousSequenceTest" />
+  </testsuite>
+  <testsuite name="GetUglyNumber_SolutionTest" tests="1" failures="0" disabled="0" errors="0" time="0.004">
+    <testcase name="handleAnyInput" status="run" time="0" classname="GetUglyNumber_SolutionTest" />
+  </testsuite>
+  <testsuite name="FindNumbersWithSumTest" tests="1" failures="0" disabled="0" errors="0" time="0.004">
+    <testcase name="handleAnyInput" status="run" time="0" classname="FindNumbersWithSumTest" />
+  </testsuite>
+  <testsuite name="IsContinuousTest" tests="1" failures="0" disabled="0" errors="0" time="0.003">
+    <testcase name="handleAnyInput" status="run" time="0" classname="IsContinuousTest" />
+  </testsuite>
+  <testsuite name="GetMedianTest" tests="1" failures="0" disabled="0" errors="0" time="0.005">
+    <testcase name="handleAnyInput" status="run" time="0.001" classname="GetMedianTest" />
+  </testsuite>
+  <testsuite name="GetLeastNumbers_SolutionTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+    <testcase name="handleAnyInput" status="run" time="0.001" classname="GetLeastNumbers_SolutionTest" />
+  </testsuite>
+  <testsuite name="movingCountTest" tests="1" failures="0" disabled="0" errors="0" time="0.006">
+    <testcase name="HandleAnyInput" status="run" time="0" classname="movingCountTest" />
+  </testsuite>
+  <testsuite name="maxInWindowsTest" tests="1" failures="0" disabled="0" errors="0" time="0.006">
+    <testcase name="HandleAnyInput" status="run" time="0.001" classname="maxInWindowsTest" />
+  </testsuite>
+  <testsuite name="MinStackTest" tests="2" failures="0" disabled="0" errors="0" time="0.006">
     <testcase name="Input1" status="run" time="0" classname="MinStackTest" />
-    <testcase name="Input2" status="run" time="0.001" classname="MinStackTest" />
+    <testcase name="Input2" status="run" time="0" classname="MinStackTest" />
   </testsuite>
-  <testsuite name="IsPopOrderTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
-    <testcase name="HanleAnyInput" status="run" time="0.001" classname="IsPopOrderTest" />
+  <testsuite name="IsPopOrderTest" tests="1" failures="0" disabled="0" errors="0" time="0.006">
+    <testcase name="HanleAnyInput" status="run" time="0" classname="IsPopOrderTest" />
   </testsuite>
-  <testsuite name="printListFromTailToHeadTest" tests="1" failures="0" disabled="0" errors="0" time="0.001">
+  <testsuite name="printListFromTailToHeadTest" tests="1" failures="0" disabled="0" errors="0" time="0.003">
     <testcase name="HandleAnyInput" status="run" time="0" classname="printListFromTailToHeadTest" />
   </testsuite>
-  <testsuite name="FibonacciTest" tests="1" failures="0" disabled="0" errors="0" time="0.002">
+  <testsuite name="FibonacciTest" tests="1" failures="0" disabled="0" errors="0" time="0.007">
     <testcase name="HandleAnyInput" status="run" time="0" classname="FibonacciTest" />
   </testsuite>
-  <testsuite name="PowerTest" tests="1" failures="0" disabled="0" errors="0" time="0.002">
+  <testsuite name="PowerTest" tests="1" failures="0" disabled="0" errors="0" time="0.008">
     <testcase name="HandleAnyInput" status="run" time="0" classname="PowerTest" />
   </testsuite>
-  <testsuite name="LastRemaining_SolutionTest" tests="1" failures="0" disabled="0" errors="0" time="0.004">
+  <testsuite name="LastRemaining_SolutionTest" tests="1" failures="0" disabled="0" errors="0" time="0.003">
     <testcase name="HandleAnyInput" status="run" time="0" classname="LastRemaining_SolutionTest" />
   </testsuite>
 </testsuites>

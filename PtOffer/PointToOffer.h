@@ -99,6 +99,9 @@ vector<int> FindNumbersWithSum(vector<int> array, int sum);
 bool IsContinuous(vector<int> numbers);
 
 //数据流中的中位数
+static priority_queue<int> g_small_que;	//最小优先队列
+static priority_queue<int, vector<int>, greater<int>> g_big_que;		//最大优先队列
+static int g_insert_count = 0;		//插入个数
 void Insert(int num);
 double GetMedian();
 
@@ -184,10 +187,10 @@ bool isSymmetrical(TreeNode* lChild, TreeNode* rChild);
 bool isSymmetrical(TreeNode* pRoot);
 
 //把二叉树打印成多行
-vector<vector<int>> Print(TreeNode* pRoot);
+vector<vector<int>> Print1(TreeNode* pRoot);
 
 //按之字形顺序打印二叉树
-vector<vector<int>> Print(TreeNode* pRoot);
+vector<vector<int>> Print2(TreeNode* pRoot);
 
 //二叉搜索树的第k个结点
 void inOrderTraversal(TreeNode* pRoot, vector<TreeNode *>& store);

@@ -92,6 +92,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>D:\googletest\googletest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

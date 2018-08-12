@@ -1,6 +1,304 @@
 #include "stdafx.h"
 #include "PointToOffer.h"
 
+//------------------------Array数组-----------------------
+
+//二维数组中的查找
+bool Find(int target, vector<vector<int>> array) {
+  //从左下角开始查找，小于target上移，大于target右移
+	if (array.empty() || array.at(0).empty()) return false;
+	int row_len = array.size(), col_len = array[0].size();
+	int i = row_len - 1, j = 0;
+	while (i >= 0 && j < col_len) {
+		if (array[i][j] == target) {
+			return true;
+		}
+		else if (array[i][j] < target) {
+			++j;		
+		}
+		else {
+			--i;
+		}
+	}
+	return false;
+}
+
+//旋转数组的最小数字
+int minNumberInRotateArray(vector<int> rotateArray) {
+	if (rotateArray.empty()) return 0;
+	int index = 1;
+	while (index < rotateArray.size()) {
+		if (rotateArray[index - 1]  > rotateArray[index]) {
+			break;
+		}
+		++index;
+	}
+	return rotateArray[index];
+}
+
+//调整数组顺序使奇数位于偶数前面
+void reOrderArray(vector<int> &array) {
+	//插入排序的思路
+	if (array.empty() || array.size() == 1) return;
+	for (int i = 1; i < array.size(); ++i) {
+		int get = array[i];
+		if ((get & 1) == 0) continue;
+		int j = i - 1;
+		while (j >= 0 && (array[j] & 1) == 0) {
+			array[j + 1] = array[j];
+			--j;
+		}
+		array[j + 1] = get;
+	}
+	return;
+}
+
+//数组中出现次数超过一半的数字
+int MoreThanHalfNum_Solution(vector<int> numbers) {
+	map<int, int> map_count;
+	for (auto num : numbers) {
+		++map_count[num];
+	}
+	for (auto num : numbers) {
+		if (map_count[num] > numbers.size() / 2) {
+			return num;
+		}
+	}
+	return 0;
+}
+
+//连续子数组的最大和
+int FindGreatestSumOfSubArray(vector<int> array) {
+  //采用动态规划策略,F[i]表示array[0, i]中连续子数组的最大和
+  // F[i] = max(array[i], F[i] + array[i])
+	if (array.empty()) return 0;
+	int max_sum = array[0], temp = array[0];
+	for (int i = 1; i < array.size(); ++i) {
+		temp = temp >= 0 ? temp + array[i] : array[i];
+		max_sum = max(max_sum, temp);
+	}
+	return max_sum;
+}
+
+//把数组排成最小的数
+string PrintMinNumber(vector<int> numbers) {
+	if (numbers.empty())	return "";
+	sort(numbers.begin(), numbers.end(), 
+			[](int x, int y){ return to_string(x) + to_string(y) < to_string(y) + to_string(x); });
+	string result = "";
+	for (auto num : numbers) {
+		result += to_string(num);
+	}
+	return result;
+}
+
+//数组中的逆序对
+long mergeCount(vector<int> &data, int lo, int hi) {
+  // data[lo, hi]
+  if (hi == lo) return 0;
+  int mid = (lo + hi) / 2;
+  long leftCount = mergeCount(data, lo, mid); 
+	long rightCount = mergeCount(data, mid + 1, hi);
+	long countSum = leftCount + rightCount;
+  int *temp = new int[hi - lo + 1];  //临时数组
+  int i = mid, j = hi, k = hi - lo;
+  while (i >= lo && j >= mid + 1) {
+    if (data[i] > data[j]) {
+			//分组的数据都是有序的
+      //从末尾进行比较，如果前一个区间元素大于后一个区间，则存在(j-mid)个逆序对
+      countSum += (j - mid);
+      temp[k--] = data[i--];
+    } else {
+      temp[k--] = data[j--];
+    }
+  }
+  //将剩余元素放入临时数组中,[lo, mid]和[mid+1, hi]中至少有一个区间为空
+  for (; j >= mid + 1; --j) temp[k--] = data[j];
+  for (; i >= lo; --i) temp[k--] = data[i];
+  for (int l = lo; l <= hi; ++l) data[l] = temp[l - lo];
+  delete[] temp;
+  return countSum % 1000000007;
+}
+int InversePairs(vector<int> data) {
+  //采用归并排序的原理：O(nlog n)
+  if (data.empty()) return 0;
+  return mergeCount(data, 0, data.size() - 1);
+}
+
+//数字在排序数组中出现的次数
+int GetNumberOfK(vector<int> data, int k) {
+  //利用STL标注库函数lower_bound()和upper_bound()
+	auto first = lower_bound(data.begin(), data.end(), k);
+	auto last = upper_bound(data.begin(), data.end(), k);
+	return last - first;
+}
+
+//数组中只出现一次的数字
+void FindNumsAppearOnce(vector<int> data, int *num1, int *num2) {
+	//利用位运算性质:b^b = 0 a^0 = a
+	//a = a^b^b = b^a^b = b^b^a
+	if (data.empty()) return;
+	int result = 0;
+	for (auto d : data) {
+		result ^= d;		//最终的结果result=num1^num2
+	}
+	result -= result & (result - 1); //分组依据：result中最低位的1
+	//num1和num2在这最低位必然一个为1，一个为0这就是分组依据
+	*num1 = 0;
+	*num2 = 0;
+	for (auto d : data) {
+		if (d & result) *num1 ^= d;
+		else *num2 ^= d;
+	}
+}
+
+//数组中重复的数字
+bool duplicate(int numbers[], int length, int *duplication) {
+	map<int, int> dup_map;
+	for (int i = 0; i < length; ++i) {
+		++dup_map[numbers[i]];
+		if (dup_map[numbers[i]] == 2) {
+			*duplication = numbers[i];
+			return true;
+		}
+	}
+	return false;
+}
+
+//顺时针打印矩阵
+vector<int> printMatrix(vector<vector<int>> matrix) {
+	if (matrix.empty()) return {};
+	int m = matrix.size(), n = matrix[0].size();
+	vector<int> result(m * n);
+	int i = 0, j = 0, index = 0;
+	while (true) {
+		for (int k = j; k < n; ++k) result[index++] = matrix[i][k];
+		if (++i >= m) break;
+		for (int k = i; k < m; ++k) result[index++] = matrix[k][n - 1];
+		if (j >= --n) break;
+		for (int k = n - 1; k >= j; --k) result[index++] = matrix[m - 1][k];
+		if (i >= --m) break;
+		for (int k = m - 1; k >= i; --k) result[index++] = matrix[k][j];
+		if (++j >= n) break;
+	}
+	return result;
+}
+
+//和为S的连续正数序列
+vector<vector<int>> FindContinuousSequence(int sum) {
+	if (sum < 3) return {};
+	vector<vector<int>> result;
+	int lo = 1, hi = 2, S = lo + hi;
+	int mid = (sum + 1) >> 1;
+	while (lo <= mid && hi <= sum) {
+		while (S < sum) {
+			++hi;
+			S += hi;
+		}
+		if (S == sum) {
+			vector<int> vec(hi - lo + 1);
+			iota(vec.begin(), vec.end(), lo);
+			result.push_back(vec);
+		}
+		S -= lo;
+		++lo;
+	}
+	return result;
+}
+
+//丑数
+int GetUglyNumber_Solution(int index) {	
+	if (index < 1) return 0;
+	vector<int> ugly(index, 1);
+	int i = 0, j = 0, k = 0;
+	for (int pos = 1; pos < index; ++pos) {
+		ugly[pos] = min(ugly[i] * 2, min(ugly[j] * 3, ugly[k] * 5));
+		if (ugly[pos] == ugly[i] * 2) ++i;
+		if (ugly[pos] == ugly[j] * 3) ++j;
+		if (ugly[pos] == ugly[k] * 5) ++k;
+	}
+	return ugly[index - 1];
+}
+
+//和为S的两个数字
+vector<int> FindNumbersWithSum(vector<int> array, int sum) {
+	if (array.size() < 2) return {};
+	vector<int> result;
+	map<int, int> sum_map;
+	int multi_value = INT_MAX;
+	for (int i = 0; i < array.size(); ++i) {
+		if (sum_map[sum - array[i]] >= 1 && (sum - array[i]) * array[i] <= multi_value) {
+			result.resize(2);
+			multi_value = (sum - array[i]) * array[i];
+			result[0] = sum - array[i];
+			result[1] = array[i];
+		}
+		++sum_map[array[i]];
+	}
+	return result;
+}
+
+//扑克牌顺子
+bool IsContinuous(vector<int> numbers) {
+	if (numbers.empty()) return false;
+	if (numbers.size() == 1) return true;
+	sort(numbers.begin(), numbers.end());
+	int queen_count = 0, distance = 0;	//记录大小王的个数和非连续派之间的距离和
+	for(int i = 0; i < numbers.size(); ++i) {
+		if (numbers[i] == 0) {
+			++queen_count;
+		}
+		else {
+			if (i + 1 < numbers.size()) {
+				if (numbers[i + 1] == numbers[i]) {
+					return false;
+				}
+				else {
+					distance += numbers[i + 1] - numbers[i] - 1;
+				}
+			}
+		}
+	}
+	return distance <= queen_count;
+}
+
+//数据流中的中位数
+void Insert(int num) {
+  //必须满足：最大优先队列的top元素小于等于最小优先队列top元素
+	++g_insert_count;
+	if (g_insert_count & 1) {
+		g_big_que.push(num);
+		g_small_que.push(g_big_que.top());
+		g_big_que.pop();
+	}
+	else {
+    g_small_que.push(num);
+    g_big_que.push(g_small_que.top());
+    g_small_que.pop();
+	}
+}
+double GetMedian() {
+	if (g_big_que.size() == g_small_que.size()) {
+		return (g_big_que.top() + g_small_que.top()) / 2.0;
+	}
+	else {
+		return g_big_que.size() > g_small_que.size() ? g_big_que.top() : g_small_que.top();
+	}
+}
+
+//最小的k个数
+vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
+	//使用STL库函数make_heap();
+	int length = input.size();
+	if (length < k) return {};
+  auto iter = input.begin();
+	for(; iter != input.begin() + k; ++iter) {
+		make_heap(iter, input.end(), greater<int>());		//构建最小堆
+	}
+	return vector<int>(input.begin(), iter);
+}
+
+
 //---------------------------树--------------------------------
 
 //重建二叉树
@@ -231,7 +529,7 @@ bool isSymmetrical(TreeNode *pRoot) {
 }
 
 //把二叉树打印成多行
-vector<vector<int>> Print(TreeNode *pRoot) {
+vector<vector<int>> Print1(TreeNode *pRoot) {
 	vector<vector<int>> store;
 	queue<TreeNode *> Q;
 	Q.push(pRoot);
@@ -255,7 +553,7 @@ vector<vector<int>> Print(TreeNode *pRoot) {
 }
 
 //按之字形顺序打印二叉树
-vector<vector<int>> Print(TreeNode *pRoot) {
+vector<vector<int>> Print2(TreeNode *pRoot) {
 	if (!pRoot) return {};
 	vector<vector<int>> result;
 	stack<TreeNode *> odd, even;
